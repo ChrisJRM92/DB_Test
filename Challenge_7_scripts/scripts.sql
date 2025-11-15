@@ -33,4 +33,7 @@ SELECT * FROM videojuegos WHERE (codigo BETWEEN 3 AND 7) OR valoracion = 7;
 SELECT * FROM videojuegos WHERE valoracion > 7 AND nombre LIKE 'C%' OR valoracion > 8 AND nombre LIKE 'D%';
 
 --Transacciones
-SELECT * FROM transacciones WHERE tipo = 'C' AND numero_cuenta BETWEEN 22004 AND 222001;
+SELECT * FROM transacciones WHERE tipo = 'C' AND numero_cuenta ~ '^[0-9]+$' AND numero_cuenta::integer BETWEEN 22004 AND 222001;
+SELECT * FROM transacciones WHERE tipo = 'D' AND fecha = '2024-05-25' AND numero_cuenta ~ '^[0-9]+$' AND numero_cuenta::integer BETWEEN 22007 AND 22010;
+SELECT * FROM transacciones WHERE codigo BETWEEN 1 AND 5 AND numero_cuenta IN ('22002','22004') AND fecha IN ('2024-05-26','2024-05-29');
+
