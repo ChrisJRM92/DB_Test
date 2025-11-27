@@ -88,6 +88,7 @@ public class MaquinaDulces {
         System.out.println("Celda: "+celdas.get(1).getCodigo()+" Stock:"+celdas.get(1).getStock()+" "+ asignacion2);
         System.out.println("Celda: "+celdas.get(2).getCodigo()+" Stock:"+celdas.get(2).getStock()+" "+ asignacion3);
         System.out.println("Celda: "+celdas.get(3).getCodigo()+" Stock:"+celdas.get(3).getStock()+" "+ asignacion4);
+        System.out.println("Saldo: " + saldo);
     }
 
     public Producto buscarProductoEnCelda(String codigo) {
@@ -110,5 +111,84 @@ public class MaquinaDulces {
 
         return null;
     }
+
+    public double consultarPrecio(String codigo) {
+
+        if (celdas.size() > 0 && celdas.get(0).getCodigo().equals(codigo)) {
+            return celdas.get(0).getProducto().getPrecio();
+        }
+
+        if (celdas.size() > 1 && celdas.get(1).getCodigo().equals(codigo)) {
+            return celdas.get(1).getProducto().getPrecio();
+        }
+
+        if (celdas.size() > 2 && celdas.get(2).getCodigo().equals(codigo)) {
+            return celdas.get(2).getProducto().getPrecio();
+        }
+
+        if (celdas.size() > 3 && celdas.get(3).getCodigo().equals(codigo)) {
+            return celdas.get(3).getProducto().getPrecio();
+        }
+
+        return 0;
+    }
+
+    public Celda buscarCeldaProducto(String codigoProducto) {
+
+        if (celdas.size() > 0 &&
+                celdas.get(0).getProducto() != null &&
+                celdas.get(0).getProducto().getCodigo().equals(codigoProducto)) {
+            return celdas.get(0);
+        }
+
+        if (celdas.size() > 1 &&
+                celdas.get(1).getProducto() != null &&
+                celdas.get(1).getProducto().getCodigo().equals(codigoProducto)) {
+            return celdas.get(1);
+        }
+
+        if (celdas.size() > 2 &&
+                celdas.get(2).getProducto() != null &&
+                celdas.get(2).getProducto().getCodigo().equals(codigoProducto)) {
+            return celdas.get(2);
+        }
+
+        if (celdas.size() > 3 &&
+                celdas.get(3).getProducto() != null &&
+                celdas.get(3).getProducto().getCodigo().equals(codigoProducto)) {
+            return celdas.get(3);
+        }
+
+        return null;
+    }
+
+    public void incrementarProductos(String codigoProducto, int cantidad) {
+
+        Celda celdaEncontrada = buscarCeldaProducto(codigoProducto);
+
+        if (celdaEncontrada == null) {
+            return;
+        }
+
+        int stockActual = celdaEncontrada.getStock();
+        celdaEncontrada.setStock(stockActual + cantidad);
+    }
+
+    public void vender(String codigoCelda) {
+
+        Celda celda = buscarCelda(codigoCelda);
+        if (celda == null) {
+            return;
+        }
+
+        int stockActual = celda.getStock();
+        celda.setStock(stockActual - 1);
+
+        double precio = celda.getProducto().getPrecio();
+        saldo = saldo + precio;
+    }
+
+
+
 
 }
