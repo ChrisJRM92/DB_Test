@@ -189,6 +189,56 @@ public class MaquinaDulces {
     }
 
 
+    public double venderConCambio(String codigoCelda, double valorIngresado) {
+
+        Celda celda = buscarCelda(codigoCelda);
+        if (celda == null) {
+            return valorIngresado;
+        }
+
+        double precio = celda.getProducto().getPrecio();
+
+        int stockActual = celda.getStock();
+        celda.setStock(stockActual - 1);
+
+        saldo = saldo + precio;
+
+        return valorIngresado - precio;
+    }
+
+
+    public ArrayList<Producto> buscarMenores(double limite) {
+
+        ArrayList<Producto> lista = new ArrayList<>();
+
+        if (celdas.size() > 0 &&
+                celdas.get(0).getProducto() != null &&
+                celdas.get(0).getProducto().getPrecio() <= limite) {
+            lista.add(celdas.get(0).getProducto());
+        }
+
+        if (celdas.size() > 1 &&
+                celdas.get(1).getProducto() != null &&
+                celdas.get(1).getProducto().getPrecio() <= limite) {
+            lista.add(celdas.get(1).getProducto());
+        }
+
+        if (celdas.size() > 2 &&
+                celdas.get(2).getProducto() != null &&
+                celdas.get(2).getProducto().getPrecio() <= limite) {
+            lista.add(celdas.get(2).getProducto());
+        }
+
+        if (celdas.size() > 3 &&
+                celdas.get(3).getProducto() != null &&
+                celdas.get(3).getProducto().getPrecio() <= limite) {
+            lista.add(celdas.get(3).getProducto());
+        }
+
+        return lista;
+    }
+
+
 
 
 }
