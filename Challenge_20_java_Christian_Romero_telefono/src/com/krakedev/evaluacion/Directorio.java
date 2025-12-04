@@ -14,6 +14,30 @@ public class Directorio {
         this.contactos = new ArrayList<>();
     }
 
+    public ArrayList<Contacto> getCorrectos() {
+        return correctos;
+    }
+
+    public void setCorrectos(ArrayList<Contacto> correctos) {
+        this.correctos = correctos;
+    }
+
+    public ArrayList<Contacto> getIncorrectos() {
+        return incorrectos;
+    }
+
+    public void setIncorrectos(ArrayList<Contacto> incorrectos) {
+        this.incorrectos = incorrectos;
+    }
+
+    public ArrayList<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(ArrayList<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
     public boolean agregarContacto(Contacto contacto){
         if (buscarPorCedula(contacto.getCedula()) != null) {
             return false;
@@ -63,5 +87,16 @@ public class Directorio {
             }
         }
         return numerosFijos;
+    }
+
+    public void depurar(){
+        for(Contacto c: contactos){
+            if(c.getDireccion() != null){
+                this.correctos.add(c);
+            }else{
+                this.incorrectos.add(c);
+            }
+        }
+        contactos.clear();
     }
 }
