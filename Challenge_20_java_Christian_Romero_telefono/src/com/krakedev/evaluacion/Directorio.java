@@ -7,6 +7,10 @@ public class Directorio {
     private ArrayList<Contacto> contactos = new ArrayList<>();
     private Date fechaModificacion;
 
+    public Directorio() {
+        this.contactos = new ArrayList<>();
+    }
+
     public boolean agregarContacto(Contacto contacto){
         if (buscarPorCedula(contacto.getCedula()) != null) {
             return false;
